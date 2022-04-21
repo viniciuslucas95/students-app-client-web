@@ -18,6 +18,6 @@ const StyledHeader = styled.div`
     align-items: center;
     background-color: ${COLOR.primary};
     padding: 0.5rem 1rem;
-    min-height: 2rem;
+    min-height: 3.25rem;
     
 `
