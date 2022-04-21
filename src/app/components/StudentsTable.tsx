@@ -4,17 +4,32 @@ import { COLOR } from '../constants/color.constant'
 import { StyledButton } from './styled-components/StyledButton'
 import { StyledText } from './styled-components/StyledText'
 
+interface IResult {
+    currentPage: number
+    resultAmount: number
+}
+
 interface IStudent {
     name: string
     age: number
 }
 
-interface IProps {
+interface IData {
     students: IStudent[]
+    result: IResult
+}
+
+interface IProps {
+    data?: IData
     style?: React.CSSProperties
 }
 
-export function StudentsTable({ students, style }: IProps) {
+export function StudentsTable({ data, style }: IProps) {
+    if (!data) return <></>
+
+    const { result: { currentPage, resultAmount }, students } = data
+    const totalPages = Math.ceil(resultAmount / 10)
+
     return <Container>
         <TitleContainer>
             <StyledText transform='uppercase' weight='bold' color='primary'>Alunos</StyledText>
@@ -39,6 +54,15 @@ export function StudentsTable({ students, style }: IProps) {
                 </Row>
             })}
         </TableContainer>
+        <PageRow>
+            {currentPage > 2 ? <PageNumber weight='bold' color='deactivated'>1</PageNumber> : null}
+            {currentPage > 3 ? <PageNumber weight='bold' color='deactivated'>...</PageNumber> : null}
+            {currentPage > 1 ? <PageNumber weight='bold' color='deactivated'>{(currentPage - 1).toString()}</PageNumber> : null}
+            <PageNumber weight='bold' color='primary'>{currentPage.toString()}</PageNumber>
+            {currentPage < totalPages ? <PageNumber weight='bold' color='deactivated'>{(currentPage + 1).toString()}</PageNumber> : null}
+            {currentPage < totalPages - 2 ? <PageNumber weight='bold' color='deactivated'>...</PageNumber> : null}
+            {currentPage < totalPages - 1 ? <PageNumber weight='bold' color='deactivated'>{totalPages.toString()}</PageNumber> : null}
+        </PageRow>
     </Container>
 }
 
@@ -58,14 +82,14 @@ const TableContainer = styled.div`
     border-width: 1px;
     border-color: ${COLOR.neutralBorder};
     border-style: solid;
-    border-radius: 0.25rem;
+    border-radius: 0.25rem 0.25rem 0 0;
 `
 
 const TitleContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 1rem;
+    margin: 0 1rem 1rem 0;
 `
 
 const Name = styled(StyledText)`
@@ -97,4 +121,18 @@ const CenteredText = styled(StyledText)`
 
 const Row = styled.div`
     white-space: nowrap;
+`
+
+const PageRow = styled.div`
+    display: flex;
+    justify-content: center;
+    border-width: 0 1px 1px 1px;
+    border-color: ${COLOR.neutralBorder};
+    border-style: solid;
+    border-radius: 0 0 0.25rem 0.25rem;
+    padding: 0.75rem 2rem;
+`
+
+const PageNumber = styled(StyledText)`
+    margin: 0 0.5rem;
 `
