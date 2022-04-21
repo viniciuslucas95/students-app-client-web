@@ -1,23 +1,30 @@
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color.constant'
 
-export const StyledButton = styled.button`
+interface IProps {
+    isSecondary?: boolean
+}
+
+export const StyledButton = styled.button<IProps>`
     font-family: 'Roboto', sans-serif;
     font-weight: 500;
     text-transform: uppercase;
-    color: ${COLOR.secondary};
-    background-color: ${COLOR.primary};
-    border-width: 0;
+    width: fit-content;
+    min-width: 4rem;
+    color: ${({ isSecondary }) => isSecondary ? COLOR.primary : COLOR.secondary};
+    background-color: ${({ isSecondary }) => isSecondary ? COLOR.secondary : COLOR.primary};
+    border-width: ${({ isSecondary }) => isSecondary ? '1px' : 0};
+    border-color: ${COLOR.primary};
     border-radius: 0.25rem;
     padding: 0.5rem 0.7rem;
 
     &:hover {
-        color: ${COLOR.secondaryDark1};
-        background-color: ${COLOR.primaryDark1};
+        color: ${({ isSecondary }) => isSecondary ? COLOR.primaryHover : COLOR.secondaryHover};
+        background-color: ${({ isSecondary }) => isSecondary ? COLOR.secondaryHover : COLOR.primaryHover};
 
     &:active{
-        color: ${COLOR.secondaryDark2};
-        background-color: ${COLOR.primaryDark2};
+        color: ${({ isSecondary }) => isSecondary ? COLOR.primaryActive : COLOR.secondaryActive};
+        background-color: ${({ isSecondary }) => isSecondary ? COLOR.secondaryActive : COLOR.primaryActive};
     }
   }
 `

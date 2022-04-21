@@ -1,8 +1,10 @@
 export const COLOR = {
     primary: '#3f51b5',
-    primaryDark1: '#394aa8',
-    primaryDark2: '#2d3c91',
+    primaryHover: '#394aa8',
+    primaryActive: '#2d3c91',
     secondary: 'white',
-    secondaryDark1: '#ededed',
-    secondaryDark2: '#e2e2e2',
+    secondaryHover: '#ededed',
+    secondaryActive: '#e2e2e2',
+    neutral: 'black',
+    neutralBorder: '#c8c8c8'
 }
