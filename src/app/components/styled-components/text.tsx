@@ -11,17 +11,10 @@ interface IProps {
     size?: Size
     color?: Color
     weight?: Weight
-}
-
-interface IComponentProps extends IProps {
     children: string
 }
 
-export function Text({ children, size, color, weight }: PropsWithChildren<IComponentProps>) {
-    return <StyledText weight={weight ?? 'regular'} size={size ?? 'medium'} color={color ?? 'primary'}>{children}</StyledText>
-}
-
-const StyledText = styled.span<Required<IProps>>`
+export const Text = styled.span<PropsWithChildren<IProps>>`
     font-size: ${({ size }) => size === 'big' ? FONT.big : size === 'small' ? FONT.small : FONT.normal};
     font-family: 'Roboto', sans-serif;
     color: ${({ color }) => color === 'secondary' ? COLOR.secondary : COLOR.primary};
