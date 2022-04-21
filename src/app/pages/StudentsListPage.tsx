@@ -7,19 +7,42 @@ export function StudentsListPage() {
         <Container>
             <Header>Sistema de Alunos</Header>
             <BodyContainer>
-                <StudentsTable students={[{
-                    age: 20,
-                    name: 'Carlos Daniel Almeida Junior da Costa Pig Desu Madara No Didi Mocó'
-                }, {
-                    age: 50,
-                    name: 'Joana'
-                }, {
-                    age: 31,
-                    name: 'Pablo'
-                }, {
-                    age: 8,
-                    name: 'Jorge'
-                }]} />
+                <StudentsTable data={{
+                    students: [{
+                        age: 20,
+                        name: 'Carlos Daniel'
+                    }, {
+                        age: 50,
+                        name: 'Joana'
+                    }, {
+                        age: 31,
+                        name: 'Pablo'
+                    }, {
+                        age: 31,
+                        name: 'Pablo'
+                    }, {
+                        age: 31,
+                        name: 'Pablo'
+                    }, {
+                        age: 31,
+                        name: 'Pablo'
+                    }, {
+                        age: 31,
+                        name: 'Pablo'
+                    }, {
+                        age: 31,
+                        name: 'Pablo'
+                    }, {
+                        age: 31,
+                        name: 'Pablo'
+                    }, {
+                        age: 8,
+                        name: 'Jorge'
+                    }], result: {
+                        currentPage: 7,
+                        resultAmount: 140
+                    }
+                }} />
             </BodyContainer>
         </Container>
     )
@@ -27,7 +50,6 @@ export function StudentsListPage() {
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
 `
 
 const BodyContainer = styled.div`
