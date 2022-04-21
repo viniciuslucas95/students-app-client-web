@@ -7,7 +7,7 @@ export function StudentsListPage() {
         <Container>
             <Header>Sistema de Alunos</Header>
             <BodyContainer>
-                <StudentsTable style={{ margin: '1rem auto' }} students={[{
+                <StudentsTable students={[{
                     age: 20,
                     name: 'Carlos Daniel Almeida Junior da Costa Pig Desu Madara No Didi Mocó'
                 }, {
