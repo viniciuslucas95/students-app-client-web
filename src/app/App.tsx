@@ -1,9 +1,7 @@
-import styled from 'styled-components'
+import { StudentsListPage } from "./pages/students-list-page";
 
 export function App() {
   return (
-    <Title>Hello world!</Title>
+    <StudentsListPage />
   )
 }
-
-const Title = styled.h1``
