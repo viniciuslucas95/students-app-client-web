@@ -16,22 +16,22 @@ export function StudentsListPage() {
                         name: 'Joana'
                     }, {
                         age: 31,
-                        name: 'Pablo'
+                        name: 'Pedro'
                     }, {
-                        age: 31,
-                        name: 'Pablo'
+                        age: 3,
+                        name: 'Ana'
                     }, {
-                        age: 31,
-                        name: 'Pablo'
+                        age: 99,
+                        name: 'Marcos'
                     }, {
-                        age: 31,
-                        name: 'Pablo'
+                        age: 17,
+                        name: 'Fabrício'
                     }, {
-                        age: 31,
-                        name: 'Pablo'
+                        age: 45,
+                        name: 'Juliana'
                     }, {
-                        age: 31,
-                        name: 'Pablo'
+                        age: 64,
+                        name: 'Fátima'
                     }, {
                         age: 31,
                         name: 'Pablo'
