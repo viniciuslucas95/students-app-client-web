@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { Header } from '../components/header-rename'
-import { Text } from '../components/styled-components/text-rename'
+import { Header } from '../components/Header'
+import { Text } from '../components/styled-components/Text'
 
 export function StudentsListPage() {
     return (
