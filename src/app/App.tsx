@@ -1,4 +1,4 @@
-import { StudentsListPage } from "./pages/students-list-page";
+import { StudentsListPage } from "./pages/StudentsListPage";
 
 export function App() {
   return (
