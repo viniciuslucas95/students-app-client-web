@@ -89,7 +89,7 @@ const TitleContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 0 1rem 1rem 0;
+    margin: 0 1rem 1rem 1rem;
 `
 
 const Name = styled(StyledText)`
