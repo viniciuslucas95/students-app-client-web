@@ -17,6 +17,7 @@ export const StyledButton = styled.button<IProps>`
     border-color: ${COLOR.primary};
     border-radius: 0.25rem;
     padding: 0.5rem 0.7rem;
+    outline-color: ${COLOR.primaryOutline};
 
     &:hover {
         color: ${({ isSecondary }) => isSecondary ? COLOR.primaryHover : COLOR.secondaryHover};
