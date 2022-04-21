@@ -7,5 +7,6 @@ export const COLOR = {
     secondaryHover: '#ededed',
     secondaryActive: '#e2e2e2',
     neutral: 'black',
-    neutralBorder: '#c8c8c8'
+    neutralBorder: '#c8c8c8',
+    neutralDeactivated: '#b3b3b3'
 }
