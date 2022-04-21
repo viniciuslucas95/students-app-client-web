@@ -22,8 +22,8 @@ export function Text({ children, size, color, weight }: PropsWithChildren<ICompo
 }
 
 const StyledText = styled.span<Required<IProps>>`
-    font-size: ${({ size: size }) => size === 'big' ? FONT.big : size === 'small' ? FONT.small : FONT.normal};
+    font-size: ${({ size }) => size === 'big' ? FONT.big : size === 'small' ? FONT.small : FONT.normal};
     font-family: 'Roboto', sans-serif;
     color: ${({ color }) => color === 'secondary' ? COLOR.secondary : COLOR.primary};
-    font-weight: ${({ weight: weight }) => weight === 'medium' ? 500 : 400};
+    font-weight: ${({ weight }) => weight === 'medium' ? 500 : 400};
 `
