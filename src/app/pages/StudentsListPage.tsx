@@ -4,9 +4,9 @@ import { StudentsTable } from '../components/StudentsTable'
 
 export function StudentsListPage() {
     return (
-        <Container>
+        <Body>
             <Header>Sistema de Alunos</Header>
-            <BodyContainer>
+            <Main>
                 <StudentsTable data={{
                     students: [{
                         age: 20,
@@ -43,15 +43,15 @@ export function StudentsListPage() {
                         resultAmount: 140
                     }
                 }} />
-            </BodyContainer>
-        </Container>
+            </Main>
+        </Body>
     )
 }
 
-const Container = styled.div`
+const Body = styled.body`
     width: 100%;
 `
 
-const BodyContainer = styled.div`
+const Main = styled.main`
     margin: 2rem;
 `
