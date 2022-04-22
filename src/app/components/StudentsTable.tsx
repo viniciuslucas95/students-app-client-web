@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { COLOR } from '../constants/color.constant'
 import { StyledButton } from './styled-components/StyledButton'
 import { StyledText } from './styled-components/StyledText'
+import { StyledTextButton } from './styled-components/StyledTextButton'
 
 interface IResult {
     currentPage: number
@@ -55,13 +56,13 @@ export function StudentsTable({ data, style }: IProps) {
             })}
         </TableContainer>
         <PageRow>
-            {currentPage > 2 ? <PageNumber weight='bold' color='deactivated'>1</PageNumber> : null}
-            {currentPage > 3 ? <PageNumber weight='bold' color='deactivated'>...</PageNumber> : null}
-            {currentPage > 1 ? <PageNumber weight='bold' color='deactivated'>{(currentPage - 1).toString()}</PageNumber> : null}
-            <PageNumber weight='bold' color='primary'>{currentPage.toString()}</PageNumber>
-            {currentPage < totalPages ? <PageNumber weight='bold' color='deactivated'>{(currentPage + 1).toString()}</PageNumber> : null}
-            {currentPage < totalPages - 2 ? <PageNumber weight='bold' color='deactivated'>...</PageNumber> : null}
-            {currentPage < totalPages - 1 ? <PageNumber weight='bold' color='deactivated'>{totalPages.toString()}</PageNumber> : null}
+            {currentPage > 2 ? <PageNumber>1</PageNumber> : null}
+            {currentPage > 3 ? <PageNumberHidder style={{ position: 'relative', bottom: '-0.1rem' }} weight='bold' color='deactivated'>...</PageNumberHidder> : null}
+            {currentPage > 1 ? <PageNumber>{(currentPage - 1).toString()}</PageNumber> : null}
+            <PageNumber isActive>{currentPage.toString()}</PageNumber>
+            {currentPage < totalPages ? <PageNumber>{(currentPage + 1).toString()}</PageNumber> : null}
+            {currentPage < totalPages - 2 ? <PageNumberHidder style={{ position: 'relative', bottom: '-0.1rem' }} weight='bold' color='deactivated'>...</PageNumberHidder> : null}
+            {currentPage < totalPages - 1 ? <PageNumber>{totalPages.toString()}</PageNumber> : null}
         </PageRow>
     </Container>
 }
@@ -133,6 +134,12 @@ const PageRow = styled.div`
     padding: 0.75rem 2rem;
 `
 
-const PageNumber = styled(StyledText)`
-    margin: 0 0.5rem;
+const PageNumber = styled(StyledTextButton)`
+    margin: 0 0.1rem;
+`
+
+const PageNumberHidder = styled(StyledText)`
+    position: relative;
+    bottom: -0.1rem;
+    margin: 0 0.1rem;
 `
