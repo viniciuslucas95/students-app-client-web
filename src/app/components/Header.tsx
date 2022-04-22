@@ -13,7 +13,7 @@ export function Header({ children }: PropsWithChildren<IProps>) {
     </StyledHeader>
 }
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.header`
     display: flex;
     align-items: center;
     background-color: ${COLOR.primary};
