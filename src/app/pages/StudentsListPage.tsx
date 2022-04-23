@@ -4,7 +4,7 @@ import { StudentsTable } from '../components/StudentsTable'
 
 export function StudentsListPage() {
     return (
-        <Body>
+        <>
             <Header>Sistema de Alunos</Header>
             <Main>
                 <StudentsTable data={{
@@ -44,13 +44,9 @@ export function StudentsListPage() {
                     }
                 }} />
             </Main>
-        </Body>
+        </>
     )
 }
-
-const Body = styled.body`
-    width: 100%;
-`
 
 const Main = styled.main`
     margin: 2rem;
