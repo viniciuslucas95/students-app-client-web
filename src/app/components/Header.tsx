@@ -15,6 +15,7 @@ export function Header({ children }: PropsWithChildren<IProps>) {
 
 const StyledHeader = styled.header`
     display: flex;
+    justify-content: center;
     align-items: center;
     background-color: ${COLOR.primary};
     padding: 0.5rem 1rem;

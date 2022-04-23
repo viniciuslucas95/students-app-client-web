@@ -84,7 +84,7 @@ const TableContainer = styled.div`
     width: fit-content;
     max-width: 100%;
     border-width: 1px;
-    border-color: ${COLOR.neutralBorder};
+    border-color: ${COLOR.border};
     border-style: solid;
     border-radius: 0.25rem 0.25rem 0 0;
 `
@@ -104,7 +104,7 @@ const Name = styled(StyledText)`
     text-overflow: ellipsis;
     vertical-align: top;
     border-width: 0 0 1px 0;
-    border-color: ${COLOR.neutralBorder};
+    border-color: ${COLOR.border};
     border-style: solid;
 `
 
@@ -113,7 +113,7 @@ const CenteredContainer = styled.div`
     width: 4rem;
     padding: 0.75rem 2rem 0.75rem 0;
     border-width: 0 0 1px 0;
-    border-color: ${COLOR.neutralBorder};
+    border-color: ${COLOR.border};
     border-style: solid;
 `
 
@@ -131,7 +131,7 @@ const PageRow = styled.div`
     display: flex;
     justify-content: center;
     border-width: 0 1px 1px 1px;
-    border-color: ${COLOR.neutralBorder};
+    border-color: ${COLOR.border};
     border-style: solid;
     border-radius: 0 0 0.25rem 0.25rem;
     padding: 0.75rem 2rem;

@@ -10,7 +10,7 @@ export const StyledTextButton = styled.button<IProps>`
     font-weight: 700;
     text-transform: uppercase;
     width: fit-content;
-    color: ${({ isActive }) => isActive ? COLOR.primary : COLOR.neutralDeactivated};
+    color: ${({ isActive }) => isActive ? COLOR.primary : COLOR.deactivated};
     background-color: ${COLOR.secondary};
     border: 0;
     border-radius: 100%;

@@ -20,6 +20,6 @@ export const StyledText = styled.span<PropsWithChildren<IProps>>`
     font-size: ${({ size }) => size === 'big' ? FONT.big : size === 'small' ? FONT.small : FONT.normal};
     font-family: 'Roboto', sans-serif;
     text-transform: ${({ transform }) => transform ?? 'none'};
-    color: ${({ color }) => color === 'secondary' ? COLOR.secondary : color === 'primary' ? COLOR.primary : color === 'deactivated' ? COLOR.neutralDeactivated : COLOR.neutral};
+    color: ${({ color }) => color === 'secondary' ? COLOR.secondary : color === 'primary' ? COLOR.primary : color === 'deactivated' ? COLOR.deactivated : COLOR.black};
     font-weight: ${({ weight }) => weight === 'medium' ? 500 : weight === 'bold' ? 700 : 400};
 `
