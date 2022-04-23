@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import { COLOR } from '../constants/color.constant'
 import { StyledButton } from './styled-components/StyledButton'
@@ -26,6 +27,8 @@ interface IProps {
 }
 
 export function StudentsTable({ data, style }: IProps) {
+    const navigate = useNavigate()
+
     if (!data) return <></>
 
     const { result: { currentPage, resultAmount }, students } = data
@@ -34,7 +37,7 @@ export function StudentsTable({ data, style }: IProps) {
     return <Container>
         <TitleContainer>
             <StyledText transform='uppercase' weight='bold' color='primary'>Alunos</StyledText>
-            <StyledButton style={{ gridColumn: '4', justifySelf: 'center' }}>Criar</StyledButton>
+            <StyledButton style={{ gridColumn: '4', justifySelf: 'center' }} onClick={() => navigate('/creation')}>Criar</StyledButton>
         </TitleContainer>
         <TableContainer style={style}>
             <Row>
