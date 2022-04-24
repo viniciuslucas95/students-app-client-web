@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { COLOR } from '../constants/color.constant'
-import { StyledText } from './styled-components/StyledText'
+import { Headline6 } from './Texts'
 
 interface IProps {
     children: string
@@ -9,16 +9,15 @@ interface IProps {
 
 export function Header({ children }: PropsWithChildren<IProps>) {
     return <StyledHeader>
-        <StyledText size='medium' weight='bold' transform='uppercase' color='secondary'>{children}</StyledText>
+        <Headline6>{children}</Headline6>
     </StyledHeader>
 }
 
 const StyledHeader = styled.header`
     display: flex;
-    justify-content: center;
     align-items: center;
-    background-color: ${COLOR.primary};
-    padding: 0.5rem 1rem;
-    min-height: 3.25rem;
-    
+    background-color: ${COLOR.neutral};
+    height: 56px;
+    padding: 0 16px;
+    box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 20%);
 `
