@@ -88,7 +88,7 @@ export function StudentsTable({ data, style }: IProps) {
             </Column>
         </Container>
         <PagesRow>
-            <Subtitle2>{result.resultAmount} resultados</Subtitle2>
+            <Subtitle2 style={{ color: COLOR.highEmphasis }}>{result.resultAmount} resultados</Subtitle2>
             <PageButtons>
                 <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
                     text: 'Anterior',

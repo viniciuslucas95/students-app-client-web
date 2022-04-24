@@ -10,7 +10,7 @@ interface IProps {
 
 export function Header({ children, button }: PropsWithChildren<IProps>) {
     return <StyledHeader>
-        <Headline6>{children}</Headline6>
+        <Headline6 style={{ color: COLOR.highEmphasis }}>{children}</Headline6>
         {button}
     </StyledHeader>
 }
