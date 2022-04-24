@@ -22,5 +22,5 @@ export function PageContainer({ children, header: { title, button } }: PropsWith
 }
 
 const Main = styled.main`
-    margin: 2rem;
+    padding: 32px;
 `

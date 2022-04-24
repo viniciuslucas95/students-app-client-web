@@ -1,7 +1,16 @@
 import { PlusIcon } from '../../assets/svgs/PlusIcon'
 import { Button } from '../components/Button'
 import { PageContainer } from '../components/PageContainer'
-import { StudentsTable } from '../components/StudentsTable'
+import { StudentsTable } from '../components/students-table/StudentsTable'
+
+const students = Array(10).fill({
+    name: 'Carlos Daniel Almeida Pereira Costa Pinto',
+    rg: 458769548,
+    cpf: 21564587452,
+    age: 28,
+    class: 'EPCAR',
+    address: 'Rua digdin madara com feijão e batata e frango, 2930'
+})
 
 export function StudentsListPage() {
     return (
@@ -12,37 +21,7 @@ export function StudentsListPage() {
             }
         }>
             <StudentsTable data={{
-                students: [{
-                    age: 20,
-                    name: 'Carlos Daniel'
-                }, {
-                    age: 50,
-                    name: 'Joana'
-                }, {
-                    age: 31,
-                    name: 'Pedro'
-                }, {
-                    age: 3,
-                    name: 'Ana'
-                }, {
-                    age: 99,
-                    name: 'Marcos'
-                }, {
-                    age: 17,
-                    name: 'Fabrício'
-                }, {
-                    age: 45,
-                    name: 'Juliana'
-                }, {
-                    age: 64,
-                    name: 'Fátima'
-                }, {
-                    age: 31,
-                    name: 'Pablo'
-                }, {
-                    age: 8,
-                    name: 'Jorge'
-                }], result: {
+                students, result: {
                     currentPage: 7,
                     resultAmount: 140
                 }
