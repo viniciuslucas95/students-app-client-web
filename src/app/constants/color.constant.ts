@@ -1,12 +1,11 @@
 export const COLOR = {
-    primary: '#3f51b5',
-    primaryHover: '#394aa8',
-    primaryActive: '#2d3c91',
-    primaryOutline: '#233078',
-    secondary: 'white',
-    secondaryHover: '#ededed',
-    secondaryActive: '#e2e2e2',
-    black: 'black',
-    border: '#c8c8c8',
-    deactivated: '#b3b3b3'
+    primary: '#30477B',
+    primaryHover: '#495D8B',
+    primaryActive: '#5F7199',
+    primaryVariant: '#4D6AA4',
+    highEmphasis: '#212121',
+    mediumEmphasis: '#666666',
+    disabled: '#9E9E9E',
+    textFieldContainer: '#E0E0E0',
+    neutral: 'white'
 }
