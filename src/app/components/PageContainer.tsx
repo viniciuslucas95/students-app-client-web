@@ -2,14 +2,19 @@ import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
 import { Header } from './Header'
 
+interface IHeader {
+    title: string
+    button?: JSX.Element
+}
+
 interface IProps {
-    headerTitle: string
+    header: IHeader
     children: JSX.Element | JSX.Element[]
 }
 
-export function PageContainer({ children, headerTitle }: PropsWithChildren<IProps>) {
+export function PageContainer({ children, header: { title, button } }: PropsWithChildren<IProps>) {
     return <>
-        <Header>{headerTitle}</Header>
+        <Header button={button}>{title}</Header>
         <Main>
             {children}
         </Main>

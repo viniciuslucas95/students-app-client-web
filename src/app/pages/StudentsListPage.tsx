@@ -1,9 +1,16 @@
+import { PlusIcon } from '../../assets/svgs/PlusIcon'
+import { Button } from '../components/Button'
 import { PageContainer } from '../components/PageContainer'
 import { StudentsTable } from '../components/StudentsTable'
 
 export function StudentsListPage() {
     return (
-        <PageContainer headerTitle='Sistema de Alunos'>
+        <PageContainer header={
+            {
+                title: 'Lista de Alunos',
+                button: <Button icon={<PlusIcon size='small' />} text='Adicionar' />
+            }
+        }>
             <StudentsTable data={{
                 students: [{
                     age: 20,
