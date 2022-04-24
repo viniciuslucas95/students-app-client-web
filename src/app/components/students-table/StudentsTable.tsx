@@ -1,8 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color.constant'
+import { Button } from '../Button'
+import { Subtitle2 } from '../Texts'
 import { Column } from './Column'
 import { Row } from './Row'
+import { Button as ButtonText } from '../Texts'
 
 interface IResult {
     currentPage: number
@@ -85,7 +88,42 @@ export function StudentsTable({ data, style }: IProps) {
             </Column>
         </Container>
         <PagesRow>
-
+            <Subtitle2>{result.resultAmount} resultados</Subtitle2>
+            <PageButtons>
+                <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
+                    text: 'Anterior',
+                    isJustText: true
+                }} />
+                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
+                    text: '1',
+                    isJustText: true
+                }} />
+                <PageTextContainer style={{ margin: '0 1px' }}>
+                    <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
+                </PageTextContainer>
+                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
+                    text: '6',
+                    isJustText: true
+                }} />
+                <PageTextContainer hasBorder style={{ margin: '0 1px' }}>
+                    <ButtonText style={{ color: COLOR.primaryVariant }}>7</ButtonText>
+                </PageTextContainer>
+                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
+                    text: '8',
+                    isJustText: true
+                }} />
+                <PageTextContainer style={{ margin: '0 1px' }}>
+                    <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
+                </PageTextContainer>
+                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
+                    text: '14',
+                    isJustText: true
+                }} />
+                <Button style={{ margin: '0 0 0 1px' }} buttonType='just-text-disabled' text={{
+                    text: 'Próximo',
+                    isJustText: true
+                }} />
+            </PageButtons>
         </PagesRow>
     </>
 }
@@ -98,6 +136,7 @@ const Container = styled.div`
 `
 
 const PagesRow = styled.div`
+    position: relative;
     display: flex;
     align-items: center;
     background-color: ${COLOR.neutral};
@@ -107,4 +146,27 @@ const PagesRow = styled.div`
     border-width: 0 1px 1px 1px;
     border-style: solid;
     border-color: ${COLOR.primaryVariant};
+`
+
+const PageButtons = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+`
+
+interface IPageTextContainer {
+    hasBorder?: boolean
+}
+
+const PageTextContainer = styled.div<IPageTextContainer>`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px; // 2 more px because of the outline
+    height: 38px; // 2 more px because of the outline
+    border: 2px solid ${({ hasBorder }) => hasBorder ? COLOR.primaryVariant : COLOR.neutral};
+    border-radius: 4px;
 `

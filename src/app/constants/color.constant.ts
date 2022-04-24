@@ -7,5 +7,7 @@ export const COLOR = {
     mediumEmphasis: '#666666',
     disabled: '#9E9E9E',
     textFieldContainer: '#E0E0E0',
-    neutral: 'white'
+    neutral: 'white',
+    neutralHover: '#E9EDF4',
+    neutralActive: '#D4DBE9'
 }

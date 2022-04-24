@@ -17,7 +17,7 @@ export function StudentsListPage() {
         <PageContainer header={
             {
                 title: 'Lista de Alunos',
-                button: <Button icon={<PlusIcon size='small' />} text='Adicionar' />
+                button: <Button icon={<PlusIcon size='small' />} text={{ text: 'Adicionar' }} />
             }
         }>
             <StudentsTable data={{

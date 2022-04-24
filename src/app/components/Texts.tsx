@@ -68,6 +68,15 @@ export const Body2 = styled.p`
     font-weight: 400;
 `
 
+
+export const Button = styled.span`
+    font-size: 14px;
+    font-family: 'Roboto', sans-serif;
+    letter-spacing: 1.25px;
+    font-weight: 500;
+    text-transform: uppercase;
+`
+
 export const Caption = styled.span`
     font-size: 12px;
     font-family: 'Roboto', sans-serif;
