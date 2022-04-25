@@ -35,6 +35,8 @@ export function StudentsTable({ data, style }: IProps) {
     if (!data) return <></>
 
     const { result, students } = data
+    const { currentPage, resultAmount } = result
+    const totalPages = Math.ceil(resultAmount / 10)
 
     return <Container>
         <ListContainer>
@@ -90,39 +92,66 @@ export function StudentsTable({ data, style }: IProps) {
         <PagesRow>
             <Subtitle2 style={{ color: COLOR.highEmphasis }}>{result.resultAmount} resultados</Subtitle2>
             <PageButtons>
-                <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
-                    text: 'Anterior',
-                    isJustText: true
-                }} />
-                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
-                    text: '1',
-                    isJustText: true
-                }} />
-                <PageTextContainer style={{ margin: '0 1px' }}>
-                    <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
-                </PageTextContainer>
-                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
-                    text: '6',
-                    isJustText: true
-                }} />
+                {
+                    result.currentPage > 1 ?
+                        <>
+                            <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
+                                text: 'Anterior',
+                                isJustText: true
+                            }} />
+                            <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' isMinimumSize text={{
+                                text: '1',
+                                isJustText: true
+                            }} />
+                        </>
+                        : null
+                }
+                {
+                    currentPage > 3 ?
+                        <PageTextContainer style={{ width: '24px' }}>
+                            <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
+                        </PageTextContainer>
+                        : null}
+                {
+                    currentPage - 1 > 0 && currentPage - 1 !== 1 ?
+                        <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
+                            text: (currentPage - 1).toString(),
+                            isJustText: true
+                        }} />
+                        : null
+                }
                 <PageTextContainer hasBorder style={{ margin: '0 1px' }}>
-                    <ButtonText style={{ color: COLOR.primaryVariant }}>7</ButtonText>
+                    <ButtonText style={{ color: COLOR.primaryVariant }}>{currentPage.toString()}</ButtonText>
                 </PageTextContainer>
-                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
-                    text: '8',
-                    isJustText: true
-                }} />
-                <PageTextContainer style={{ margin: '0 1px' }}>
-                    <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
-                </PageTextContainer>
-                <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
-                    text: '14',
-                    isJustText: true
-                }} />
-                <Button style={{ margin: '0 0 0 1px' }} buttonType='just-text-disabled' text={{
-                    text: 'Próximo',
-                    isJustText: true
-                }} />
+                {
+                    currentPage + 1 < totalPages && currentPage + 1 !== totalPages ?
+                        <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
+                            text: (currentPage + 1).toString(),
+                            isJustText: true
+                        }} />
+                        : null
+                }
+                {
+                    currentPage < totalPages - 2 ?
+                        <PageTextContainer style={{ width: '24px' }}>
+                            <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
+                        </PageTextContainer>
+                        : null
+                }
+                {
+                    currentPage < totalPages ?
+                        <>
+                            <Button style={{ margin: '0 1px 0 0' }} isMinimumSize buttonType='just-text-disabled' text={{
+                                text: totalPages.toString(),
+                                isJustText: true
+                            }} />
+                            <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
+                                text: 'Próximo',
+                                isJustText: true
+                            }} />
+                        </>
+                        : null
+                }
             </PageButtons>
         </PagesRow>
     </Container>

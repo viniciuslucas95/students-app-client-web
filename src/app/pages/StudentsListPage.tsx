@@ -23,7 +23,7 @@ export function StudentsListPage() {
             <StudentsTable data={{
                 students, result: {
                     currentPage: 7,
-                    resultAmount: 140
+                    resultAmount: 146
                 }
             }} />
         </PageContainer>
