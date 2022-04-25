@@ -5,9 +5,10 @@ import { Button } from '../Button'
 import { Subtitle2 } from '../Texts'
 import { Column } from './Column'
 import { Row } from './Row'
-import { Button as ButtonText } from '../Texts'
+import { Button as PageNumberText } from '../Texts'
 import { useDimensions } from '../../hooks/useDimensions'
 import { ExpandIcon } from '../../../assets/svgs/ExpandIcon'
+import { PageNumberIconButton, PageNumberTextButton } from './PageNumberButtons'
 
 interface IResult {
     currentPage: number
@@ -101,65 +102,51 @@ export function StudentsTable({ data, style }: IProps) {
                         <>
                             {
                                 width <= 768 ?
-                                    <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' icon={<ExpandIcon direction='left' color={COLOR.disabled} size='medium' />} />
-                                    : <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
-                                        text: 'Anterior',
-                                        isJustText: true
-                                    }} />
+                                    <PageNumberIconButton>
+                                        <ExpandIcon direction='left' color={COLOR.disabled} size='medium' />
+                                    </PageNumberIconButton>
+                                    : <PageNumberTextButton forceMinWidth={false}>Anterior</PageNumberTextButton>
                             }
-                            <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' isMinimumSize text={{
-                                text: '1',
-                                isJustText: true
-                            }} />
+                            <PageNumberTextButton>1</PageNumberTextButton>
                         </>
                         : null
                 }
                 {
                     currentPage > 3 ?
                         <PageTextContainer style={{ width: '24px' }}>
-                            <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
+                            <PageNumberText style={{ color: COLOR.disabled }}>...</PageNumberText>
                         </PageTextContainer>
                         : null}
                 {
                     currentPage - 1 > 0 && currentPage - 1 !== 1 ?
-                        <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
-                            text: (currentPage - 1).toString(),
-                            isJustText: true
-                        }} />
+                        <PageNumberTextButton>{currentPage - 1}</PageNumberTextButton>
                         : null
                 }
                 <PageTextContainer hasBorder style={{ margin: '0 1px' }}>
-                    <ButtonText style={{ color: COLOR.primaryVariant }}>{currentPage.toString()}</ButtonText>
+                    <PageNumberText style={{ color: COLOR.primaryVariant }}>{currentPage.toString()}</PageNumberText>
                 </PageTextContainer>
                 {
                     currentPage + 1 < totalPages && currentPage + 1 !== totalPages ?
-                        <Button style={{ margin: '0 1px' }} buttonType='just-text-disabled' isMinimumSize text={{
-                            text: (currentPage + 1).toString(),
-                            isJustText: true
-                        }} />
+                        <PageNumberTextButton>{currentPage + 1}</PageNumberTextButton>
                         : null
                 }
                 {
                     currentPage < totalPages - 2 ?
                         <PageTextContainer style={{ width: '24px' }}>
-                            <ButtonText style={{ color: COLOR.disabled }}>...</ButtonText>
+                            <PageNumberText style={{ color: COLOR.disabled }}>...</PageNumberText>
                         </PageTextContainer>
                         : null
                 }
                 {
                     currentPage < totalPages ?
                         <>
-                            <Button style={{ margin: '0 1px 0 0' }} isMinimumSize buttonType='just-text-disabled' text={{
-                                text: totalPages.toString(),
-                                isJustText: true
-                            }} />
+                            <PageNumberTextButton>{totalPages}</PageNumberTextButton>
                             {
                                 width <= 768 ?
-                                    <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' icon={<ExpandIcon direction='right' color={COLOR.disabled} size='medium' />} />
-                                    : <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
-                                        text: 'Próximo',
-                                        isJustText: true
-                                    }} />
+                                    <PageNumberIconButton>
+                                        <ExpandIcon direction='right' color={COLOR.disabled} size='medium' />
+                                    </PageNumberIconButton>
+                                    : <PageNumberTextButton forceMinWidth={false}>Próximo</PageNumberTextButton>
                             }
                         </>
                         : null
