@@ -36,8 +36,8 @@ export function StudentsTable({ data, style }: IProps) {
 
     const { result, students } = data
 
-    return <>
-        <Container>
+    return <Container>
+        <ListContainer>
             <Column maxWidth='16rem'>
                 <Row isTitle>Nome</Row>
                 <>
@@ -86,7 +86,7 @@ export function StudentsTable({ data, style }: IProps) {
                     })}
                 </>
             </Column>
-        </Container>
+        </ListContainer>
         <PagesRow>
             <Subtitle2 style={{ color: COLOR.highEmphasis }}>{result.resultAmount} resultados</Subtitle2>
             <PageButtons>
@@ -125,10 +125,16 @@ export function StudentsTable({ data, style }: IProps) {
                 }} />
             </PageButtons>
         </PagesRow>
-    </>
+    </Container>
 }
 
 const Container = styled.div`
+    width: fit-content;
+    max-width: 100%;
+    margin: auto;
+`
+
+const ListContainer = styled.div`
     white-space: nowrap;
     overflow: auto;
     border-radius: 4px 4px 0 0;
@@ -139,6 +145,7 @@ const PagesRow = styled.div`
     position: relative;
     display: flex;
     align-items: center;
+    width: 100%;
     background-color: ${COLOR.neutral};
     padding: 0 32px;
     height: 48px;
