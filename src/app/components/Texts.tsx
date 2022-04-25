@@ -68,7 +68,6 @@ export const Body2 = styled.p`
     font-weight: 400;
 `
 
-
 export const Button = styled.span`
     font-size: 14px;
     font-family: 'Roboto', sans-serif;
@@ -89,4 +88,5 @@ export const Overline = styled.span`
     font-family: 'Roboto', sans-serif;
     letter-spacing: 1.5px;
     font-weight: 400;
+    text-transform: uppercase;
 `

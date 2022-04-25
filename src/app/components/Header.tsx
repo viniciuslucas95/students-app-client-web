@@ -5,13 +5,11 @@ import { Headline6 } from './Texts'
 
 interface IProps {
     children: string
-    button?: JSX.Element
 }
 
-export function Header({ children, button }: PropsWithChildren<IProps>) {
+export function Header({ children }: PropsWithChildren<IProps>) {
     return <StyledHeader>
         <Headline6 style={{ color: COLOR.highEmphasis }}>{children}</Headline6>
-        {button}
     </StyledHeader>
 }
 

@@ -6,6 +6,8 @@ import { Subtitle2 } from '../Texts'
 import { Column } from './Column'
 import { Row } from './Row'
 import { Button as ButtonText } from '../Texts'
+import { useDimensions } from '../../hooks/useDimensions'
+import { ExpandIcon } from '../../../assets/svgs/ExpandIcon'
 
 interface IResult {
     currentPage: number
@@ -32,6 +34,8 @@ interface IProps {
 }
 
 export function StudentsTable({ data, style }: IProps) {
+    const { width } = useDimensions()
+
     if (!data) return <></>
 
     const { result, students } = data
@@ -95,10 +99,14 @@ export function StudentsTable({ data, style }: IProps) {
                 {
                     result.currentPage > 1 ?
                         <>
-                            <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
-                                text: 'Anterior',
-                                isJustText: true
-                            }} />
+                            {
+                                width <= 768 ?
+                                    <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' icon={<ExpandIcon direction='left' color={COLOR.disabled} size='medium' />} />
+                                    : <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
+                                        text: 'Anterior',
+                                        isJustText: true
+                                    }} />
+                            }
                             <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' isMinimumSize text={{
                                 text: '1',
                                 isJustText: true
@@ -145,10 +153,14 @@ export function StudentsTable({ data, style }: IProps) {
                                 text: totalPages.toString(),
                                 isJustText: true
                             }} />
-                            <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
-                                text: 'Próximo',
-                                isJustText: true
-                            }} />
+                            {
+                                width <= 768 ?
+                                    <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' icon={<ExpandIcon direction='right' color={COLOR.disabled} size='medium' />} />
+                                    : <Button style={{ margin: '0 1px 0 0' }} buttonType='just-text-disabled' text={{
+                                        text: 'Próximo',
+                                        isJustText: true
+                                    }} />
+                            }
                         </>
                         : null
                 }
@@ -160,6 +172,7 @@ export function StudentsTable({ data, style }: IProps) {
 const Container = styled.div`
     width: fit-content;
     max-width: 100%;
+    padding: 32px;
     margin: auto;
 `
 

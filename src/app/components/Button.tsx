@@ -47,7 +47,7 @@ const StyledButton = styled.button<IStyledButtonProps>`
     padding: ${({ hasIcon, hasText }) => hasIcon && hasText ? '0 16px 0 12px' : !hasIcon && hasText ? '0 16px' : '0'};
     justify-content: center;
     align-items: center;
-    border-radius: ${({ hasText }) => hasText ? '4px' : '24px'};
+    border-radius: 4px;
     border-width: 0px;
     background-color: ${({ buttonType }) => buttonType === 'primary' ? COLOR.primary : COLOR.neutral};
     color: ${({ buttonType }) => (buttonType === 'secondary' || buttonType === 'just-text') ? COLOR.primary : buttonType === 'just-text-disabled' ? COLOR.disabled : COLOR.neutral};

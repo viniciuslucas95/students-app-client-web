@@ -1,5 +1,3 @@
-import { PlusIcon } from '../../assets/svgs/PlusIcon'
-import { Button } from '../components/Button'
 import { PageContainer } from '../components/PageContainer'
 import { StudentsTable } from '../components/students-table/StudentsTable'
 
@@ -14,18 +12,13 @@ const students = Array(10).fill({
 
 export function StudentsListPage() {
     return (
-        <PageContainer header={
-            {
-                title: 'Lista de Alunos',
-                button: <Button icon={<PlusIcon size='small' />} text={{ text: 'Adicionar' }} />
-            }
-        }>
+        <PageContainer headerTitle='Lista de Alunos'>
             <StudentsTable data={{
                 students, result: {
                     currentPage: 7,
                     resultAmount: 146
                 }
             }} />
-        </PageContainer>
+        </PageContainer >
     )
 }
