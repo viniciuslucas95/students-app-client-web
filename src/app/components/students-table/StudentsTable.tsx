@@ -30,18 +30,18 @@ interface IProps {
     style?: React.CSSProperties
 }
 
-export const MAX_RESULTS_ON_PAGE = 10
+export const MAX_STUDENTS_ON_PAGE = 10
 
 export function StudentsTable({ studentsResult, style, currentPage, setCurrentPage }: IProps) {
     const { width } = useDimensions()
     const { results, students } = studentsResult
-    const totalPages = Math.ceil(results / MAX_RESULTS_ON_PAGE)
+    const totalPages = Math.ceil(results / MAX_STUDENTS_ON_PAGE)
 
     function getRows(key: keyof IStudent) {
         const rows = []
 
-        for (let i = 0; i < MAX_RESULTS_ON_PAGE; i++) {
-            const index = i + (currentPage - 1) * MAX_RESULTS_ON_PAGE
+        for (let i = 0; i < MAX_STUDENTS_ON_PAGE; i++) {
+            const index = i + (currentPage - 1) * MAX_STUDENTS_ON_PAGE
             const student = students[index]
 
             if (!student) {
@@ -61,15 +61,15 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
 
     return <Container>
         <ListContainer>
-            <Column maxWidth='16rem'>
+            <Column width='16rem'>
                 <Row isTitle>Nome</Row>
                 {getRows('name')}
             </Column>
-            <Column maxWidth='12rem'>
+            <Column width='12rem'>
                 <Row isTitle>RG</Row>
                 {getRows('rg')}
             </Column>
-            <Column maxWidth='12rem'>
+            <Column width='12rem'>
                 <Row isTitle>CPF</Row>
                 {getRows('cpf')}
             </Column>
@@ -81,7 +81,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
                 <Row isTitle>Turma</Row>
                 {getRows('class')}
             </Column>
-            <Column maxWidth='20rem'>
+            <Column width='20rem'>
                 <Row isTitle>Endereço</Row>
                 {getRows('address')}
             </Column>
