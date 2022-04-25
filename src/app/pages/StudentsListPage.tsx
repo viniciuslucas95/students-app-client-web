@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { PlusIcon } from '../../assets/svgs/PlusIcon'
 import { Button } from '../components/Button'
 import { PageContainer } from '../components/PageContainer'
-import { IStudent, IStudentsResult, MAX_STUDENTS_ON_PAGE, StudentsTable } from '../components/students-table/StudentsTable'
+import { MAX_STUDENTS_ON_PAGE, StudentsTable } from '../components/students-table/StudentsTable'
 import { COLOR } from '../constants/color.constant'
+import { IStudent, IStudentsResult } from '../dto/students.dto'
+import { AxiosStudentsRepository } from '../repositories/students/axios-students.repository'
 
 const emptyStudents: IStudentsResult = {
     students: [],
@@ -19,6 +21,8 @@ const fakeStudentData: IStudent = {
     address: 'Rua digdin madara com feijão e batata e frango, 2930'
 }
 
+const studentsRepository = new AxiosStudentsRepository('http://localhost:3001/students')
+
 export function StudentsListPage() {
     const [currentPage, setCurrentPage] = useState(1)
     const [studentsResult, setStudentsResult] = useState<IStudentsResult>(emptyStudents)
@@ -28,22 +32,22 @@ export function StudentsListPage() {
 
         if (currentPage * MAX_STUDENTS_ON_PAGE < studentsResult.students.length) return
 
-        setStudentsResult(prevState => ({
-            results: prevState.results,
-            students: [...prevState.students, ...Array(MAX_STUDENTS_ON_PAGE).fill(fakeStudentData)]
-        }))
+        (async () => {
+            await fetchStudents()
+        })()
     }, [currentPage])
 
-    function setFakeStudents() {
-        setStudentsResult({
-            students: Array(MAX_STUDENTS_ON_PAGE).fill(fakeStudentData),
-            results: 81
-        })
+    async function fetchStudents() {
+        try {
+            setStudentsResult(await studentsRepository.getAll())
+        } catch (err) {
+            console.error(err)
+        }
     }
 
     return (
         <PageContainer headerTitle='Lista de Alunos'>
-            <Button style={{ margin: '32px auto 0 auto' }} onClick={() => setFakeStudents()} content={{ icon: <PlusIcon color={COLOR.neutral} />, text: 'Buscar Fake Alunos' }} />
+            <Button style={{ margin: '32px auto 0 auto' }} onClick={() => fetchStudents()} content={{ icon: <PlusIcon color={COLOR.neutral} />, text: 'Buscar Todos Alunos' }} />
             <StudentsTable setCurrentPage={setCurrentPage} currentPage={currentPage} studentsResult={studentsResult} />
         </PageContainer >
     )

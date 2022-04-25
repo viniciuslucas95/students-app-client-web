@@ -8,20 +8,7 @@ import { Button as PageNumberText } from '../Texts'
 import { useDimensions } from '../../hooks/useDimensions'
 import { ExpandIcon } from '../../../assets/svgs/ExpandIcon'
 import { PageNumberIconButton, PageNumberTextButton } from './PageNumberButtons'
-
-export interface IStudent {
-    name: string
-    rg: number
-    cpf: number
-    age: number
-    class: string
-    address: string
-}
-
-export interface IStudentsResult {
-    students: IStudent[]
-    results: number,
-}
+import { IStudent, IStudentsResult } from '../../dto/students.dto'
 
 interface IProps {
     studentsResult: IStudentsResult
