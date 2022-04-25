@@ -95,7 +95,11 @@ export function StudentsTable({ data, style }: IProps) {
             </Column>
         </ListContainer>
         <PagesRow>
-            <Subtitle2 style={{ color: COLOR.highEmphasis }}>{result.resultAmount} resultados</Subtitle2>
+            {
+                width > 575 ?
+                    <Subtitle2 style={{ color: COLOR.highEmphasis }}>{result.resultAmount} resultados</Subtitle2>
+                    : null
+            }
             <PageButtons>
                 {
                     result.currentPage > 1 ?
@@ -161,6 +165,10 @@ const Container = styled.div`
     max-width: 100%;
     padding: 32px;
     margin: auto;
+
+    @media screen and (max-width: 650px){
+        padding: 0;
+    }
 `
 
 const ListContainer = styled.div`
@@ -168,6 +176,11 @@ const ListContainer = styled.div`
     overflow: auto;
     border-radius: 4px 4px 0 0;
     border: 1px solid ${COLOR.primaryVariant};
+
+    @media screen and (max-width: 650px){
+        border: 0;
+        border-radius: 0;
+    }
 `
 
 const PagesRow = styled.div`
@@ -182,6 +195,11 @@ const PagesRow = styled.div`
     border-width: 0 1px 1px 1px;
     border-style: solid;
     border-color: ${COLOR.primaryVariant};
+
+    @media screen and (max-width: 650px){
+        border-width: 0 0 1px 0;
+        border-radius: 0;
+    }
 `
 
 const PageButtons = styled.div`

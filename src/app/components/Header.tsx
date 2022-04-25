@@ -14,6 +14,7 @@ export function Header({ children }: PropsWithChildren<IProps>) {
 }
 
 const StyledHeader = styled.header`
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
