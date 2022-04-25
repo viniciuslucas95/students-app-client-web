@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { COLOR } from '../../constants/color.constant'
-import { Button } from '../Button'
 import { Subtitle2 } from '../Texts'
 import { Column } from './Column'
 import { Row } from './Row'
@@ -10,12 +9,7 @@ import { useDimensions } from '../../hooks/useDimensions'
 import { ExpandIcon } from '../../../assets/svgs/ExpandIcon'
 import { PageNumberIconButton, PageNumberTextButton } from './PageNumberButtons'
 
-interface IResult {
-    currentPage: number
-    resultAmount: number
-}
-
-interface IStudent {
+export interface IStudent {
     name: string
     rg: number
     cpf: number
@@ -24,94 +18,94 @@ interface IStudent {
     address: string
 }
 
-interface IData {
+export interface IStudentsResult {
     students: IStudent[]
-    result: IResult
+    results: number,
 }
 
 interface IProps {
-    data?: IData
+    studentsResult: IStudentsResult
+    currentPage: number
+    setCurrentPage: React.Dispatch<React.SetStateAction<number>>
     style?: React.CSSProperties
 }
 
-export function StudentsTable({ data, style }: IProps) {
+export const MAX_RESULTS_ON_PAGE = 10
+
+export function StudentsTable({ studentsResult, style, currentPage, setCurrentPage }: IProps) {
     const { width } = useDimensions()
+    const { results, students } = studentsResult
+    const totalPages = Math.ceil(results / MAX_RESULTS_ON_PAGE)
 
-    if (!data) return <></>
+    function getRows(key: keyof IStudent) {
+        const rows = []
 
-    const { result, students } = data
-    const { currentPage, resultAmount } = result
-    const totalPages = Math.ceil(resultAmount / 10)
+        for (let i = 0; i < MAX_RESULTS_ON_PAGE; i++) {
+            const index = i + (currentPage - 1) * MAX_RESULTS_ON_PAGE
+            const student = students[index]
+
+            if (!student) {
+                rows.push(<Row key={index}> </Row>)
+                continue
+            }
+
+            const value = student[key]
+
+            rows.push(<Row isVariant={index % 2 === 1 ? true : false} key={index}>{typeof value === 'string' ? value : value.toString()}</Row>)
+        }
+
+        return <>
+            {rows}
+        </>
+    }
 
     return <Container>
         <ListContainer>
             <Column maxWidth='16rem'>
                 <Row isTitle>Nome</Row>
-                <>
-                    {students.map((student, index) => {
-                        return <Row isVariant={index % 2 === 1 ? true : false} key={index}>{student.name}</Row>
-                    })}
-                </>
+                {getRows('name')}
             </Column>
             <Column maxWidth='12rem'>
                 <Row isTitle>RG</Row>
-                <>
-                    {students.map((student, index) => {
-                        return <Row isVariant={index % 2 === 1 ? true : false} key={index}>{student.rg.toString()}</Row>
-                    })}
-                </>
+                {getRows('rg')}
             </Column>
             <Column maxWidth='12rem'>
                 <Row isTitle>CPF</Row>
-                <>
-                    {students.map((student, index) => {
-                        return <Row isVariant={index % 2 === 1 ? true : false} key={index}>{student.cpf.toString()}</Row>
-                    })}
-                </>
+                {getRows('cpf')}
             </Column>
             <Column>
                 <Row isTitle>Idade</Row>
-                <>
-                    {students.map((student, index) => {
-                        return <Row isVariant={index % 2 === 1 ? true : false} key={index}>{student.age.toString()}</Row>
-                    })}
-                </>
+                {getRows('age')}
             </Column>
             <Column>
                 <Row isTitle>Turma</Row>
-                <>
-                    {students.map((student, index) => {
-                        return <Row isVariant={index % 2 === 1 ? true : false} key={index}>{student.class}</Row>
-                    })}
-                </>
+                {getRows('class')}
             </Column>
             <Column maxWidth='20rem'>
                 <Row isTitle>Endereço</Row>
-                <>
-                    {students.map((student, index) => {
-                        return <Row isVariant={index % 2 === 1 ? true : false} key={index}>{student.address}</Row>
-                    })}
-                </>
+                {getRows('address')}
             </Column>
         </ListContainer>
         <PagesRow>
             {
                 width > 575 ?
-                    <Subtitle2 style={{ color: COLOR.highEmphasis }}>{result.resultAmount} resultados</Subtitle2>
+                    results > 0 ?
+                        <Subtitle2 style={{ color: COLOR.highEmphasis }}>{results} resultados</Subtitle2>
+                        : <Subtitle2 style={{ color: COLOR.highEmphasis }}>Sem resultados</Subtitle2>
                     : null
             }
             <PageButtons>
                 {
-                    result.currentPage > 1 ?
+                    currentPage > 1 ?
                         <>
                             {
                                 width <= 768 ?
                                     <PageNumberIconButton>
                                         <ExpandIcon direction='left' color={COLOR.disabled} size='medium' />
                                     </PageNumberIconButton>
-                                    : <PageNumberTextButton forceMinWidth={false}>Anterior</PageNumberTextButton>
+                                    : <PageNumberTextButton onClick={() => setCurrentPage(currentPage - 1)} forceMinWidth={false}>Anterior</PageNumberTextButton>
                             }
-                            <PageNumberTextButton>1</PageNumberTextButton>
+                            <PageNumberTextButton onClick={() => setCurrentPage(1)}>1</PageNumberTextButton>
                         </>
                         : null
                 }
@@ -123,7 +117,7 @@ export function StudentsTable({ data, style }: IProps) {
                         : null}
                 {
                     currentPage - 1 > 0 && currentPage - 1 !== 1 ?
-                        <PageNumberTextButton>{currentPage - 1}</PageNumberTextButton>
+                        <PageNumberTextButton onClick={() => setCurrentPage(currentPage - 1)}>{currentPage - 1}</PageNumberTextButton>
                         : null
                 }
                 <PageTextContainer hasBorder style={{ margin: '0 1px' }}>
@@ -131,7 +125,7 @@ export function StudentsTable({ data, style }: IProps) {
                 </PageTextContainer>
                 {
                     currentPage + 1 < totalPages && currentPage + 1 !== totalPages ?
-                        <PageNumberTextButton>{currentPage + 1}</PageNumberTextButton>
+                        <PageNumberTextButton onClick={() => setCurrentPage(currentPage + 1)}>{currentPage + 1}</PageNumberTextButton>
                         : null
                 }
                 {
@@ -144,13 +138,13 @@ export function StudentsTable({ data, style }: IProps) {
                 {
                     currentPage < totalPages ?
                         <>
-                            <PageNumberTextButton>{totalPages}</PageNumberTextButton>
+                            <PageNumberTextButton onClick={() => setCurrentPage(totalPages)}>{totalPages}</PageNumberTextButton>
                             {
                                 width <= 768 ?
                                     <PageNumberIconButton>
                                         <ExpandIcon direction='right' color={COLOR.disabled} size='medium' />
                                     </PageNumberIconButton>
-                                    : <PageNumberTextButton forceMinWidth={false}>Próximo</PageNumberTextButton>
+                                    : <PageNumberTextButton onClick={() => setCurrentPage(currentPage + 1)} forceMinWidth={false}>Próximo</PageNumberTextButton>
                             }
                         </>
                         : null

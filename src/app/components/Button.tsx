@@ -25,6 +25,7 @@ interface ICommonProps {
 interface IProps extends ICommonProps {
     content: IContent
     style?: React.CSSProperties
+    onClick: Function
 }
 
 const defaultColor: IColor = {
@@ -35,10 +36,10 @@ const defaultColor: IColor = {
     outline: COLOR.highEmphasis
 }
 
-export function Button({ style, content, buttonColor: color = defaultColor, forceMinWidth = false, hasShadow = true }: IProps) {
+export function Button({ style, content, buttonColor: color = defaultColor, forceMinWidth = false, hasShadow = true, onClick }: IProps) {
     const { icon, text } = content
 
-    return <StyledButton buttonColor={color ?? defaultColor} style={style} hasShadow={hasShadow} forceMinWidth={forceMinWidth} hasIcon={icon ? true : false} hasText={text ? true : false}>
+    return <StyledButton onClick={() => onClick()} buttonColor={color ?? defaultColor} style={style} hasShadow={hasShadow} forceMinWidth={forceMinWidth} hasIcon={icon ? true : false} hasText={text ? true : false}>
         {
             icon ?
                 <IconContainer hasText={text ? true : false}>
