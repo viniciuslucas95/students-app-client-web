@@ -8,10 +8,10 @@ import { Button as PageNumberText } from '../Texts'
 import { useDimensions } from '../../hooks/useDimensions'
 import { ExpandIcon } from '../../../assets/svgs/ExpandIcon'
 import { PageNumberIconButton, PageNumberTextButton } from './PageNumberButtons'
-import { IStudent, IStudentsResult } from '../../dto/students.dto'
+import { Student, StudentsResult } from '../../dto/students.dto'
 
 interface IProps {
-    studentsResult: IStudentsResult
+    studentsResult: StudentsResult
     currentPage: number
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
     style?: React.CSSProperties
@@ -24,7 +24,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
     const { results, students } = studentsResult
     const totalPages = Math.ceil(results / MAX_STUDENTS_ON_PAGE)
 
-    function getRows(key: keyof IStudent) {
+    function getRows(key: keyof Student) {
         const rows = []
 
         for (let i = 0; i < MAX_STUDENTS_ON_PAGE; i++) {
@@ -61,12 +61,12 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
                 {getRows('cpf')}
             </Column>
             <Column>
-                <Row isTitle>Idade</Row>
-                {getRows('age')}
-            </Column>
-            <Column>
                 <Row isTitle>Turma</Row>
                 {getRows('class')}
+            </Column>
+            <Column width='14rem'>
+                <Row isTitle>Data de Nascimento</Row>
+                {getRows('birthdate')}
             </Column>
             <Column width='20rem'>
                 <Row isTitle>Endereço</Row>
@@ -87,7 +87,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
                         <>
                             {
                                 width <= 768 ?
-                                    <PageNumberIconButton>
+                                    <PageNumberIconButton onClick={() => setCurrentPage(currentPage - 1)}>
                                         <ExpandIcon direction='left' color={COLOR.disabled} size='medium' />
                                     </PageNumberIconButton>
                                     : <PageNumberTextButton onClick={() => setCurrentPage(currentPage - 1)} forceMinWidth={false}>Anterior</PageNumberTextButton>
@@ -128,7 +128,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
                             <PageNumberTextButton onClick={() => setCurrentPage(totalPages)}>{totalPages}</PageNumberTextButton>
                             {
                                 width <= 768 ?
-                                    <PageNumberIconButton>
+                                    <PageNumberIconButton onClick={() => setCurrentPage(currentPage + 1)}>
                                         <ExpandIcon direction='right' color={COLOR.disabled} size='medium' />
                                     </PageNumberIconButton>
                                     : <PageNumberTextButton onClick={() => setCurrentPage(currentPage + 1)} forceMinWidth={false}>Próximo</PageNumberTextButton>

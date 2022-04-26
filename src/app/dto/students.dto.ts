@@ -1,13 +1,13 @@
-export interface IStudent {
+export interface Student {
     name: string
     rg: number
     cpf: number
-    age: number
     class: string
     address: string
+    birthdate: Date
 }
 
-export interface IStudentsResult {
-    students: IStudent[]
+export interface StudentsResult {
+    students: Student[]
     results: number,
 }

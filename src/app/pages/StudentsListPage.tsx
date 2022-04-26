@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import { PlusIcon } from '../../assets/svgs/PlusIcon'
 import { Button } from '../components/Button'
-import { PageContainer } from '../components/PageContainer'
+import { PageContainer } from '../components/page-container/PageContainer'
 import { MAX_STUDENTS_ON_PAGE, StudentsTable } from '../components/students-table/StudentsTable'
 import { COLOR } from '../constants/color.constant'
-import { IStudent, IStudentsResult } from '../dto/students.dto'
+import { Student, StudentsResult } from '../dto/students.dto'
 import { AxiosStudentsRepository } from '../repositories/students/axios-students.repository'
 
-const emptyStudents: IStudentsResult = {
+const emptyStudents: StudentsResult = {
     students: [],
     results: 0
 }
 
-const fakeStudentData: IStudent = {
+const fakeStudentData: Student = {
     name: 'Carlos Daniel Almeida Pereira Costa Pinto',
     rg: 458769548,
     cpf: 21564587452,
@@ -25,7 +25,7 @@ const studentsRepository = new AxiosStudentsRepository('http://localhost:3001/st
 
 export function StudentsListPage() {
     const [currentPage, setCurrentPage] = useState(1)
-    const [studentsResult, setStudentsResult] = useState<IStudentsResult>(emptyStudents)
+    const [studentsResult, setStudentsResult] = useState<StudentsResult>(emptyStudents)
 
     useEffect(() => {
         if (studentsResult.results === 0) return
@@ -39,7 +39,7 @@ export function StudentsListPage() {
 
     async function fetchStudents() {
         try {
-            setStudentsResult(await studentsRepository.getAll())
+            setStudentsResult(await studentsRepository.find())
         } catch (err) {
             console.error(err)
         }

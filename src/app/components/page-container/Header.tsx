@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
 import styled from 'styled-components'
-import { COLOR } from '../constants/color.constant'
-import { Headline6 } from './Texts'
+import { COLOR } from '../../constants/color.constant'
+import { Headline6 } from '../Texts'
 
 interface IProps {
     children: string

@@ -27,9 +27,10 @@ export function PageNumberTextButton({ children, forceMinWidth = true, onClick }
 
 interface IIconProps {
     children: JSX.Element
+    onClick: Function
 }
 
-export function PageNumberIconButton({ children }: PropsWithChildren<IIconProps>) {
+export function PageNumberIconButton({ children, onClick }: PropsWithChildren<IIconProps>) {
     return <Button style={{ margin: '0 1px' }}
         forceMinWidth
         content={{ icon: children }}
@@ -41,5 +42,6 @@ export function PageNumberIconButton({ children }: PropsWithChildren<IIconProps>
             content: COLOR.disabled
         }}
         hasShadow={false}
+        onClick={onClick}
     />
 }
