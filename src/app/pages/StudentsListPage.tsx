@@ -4,51 +4,69 @@ import { Button } from '../components/Button'
 import { PageContainer } from '../components/page-container/PageContainer'
 import { MAX_STUDENTS_ON_PAGE, StudentsTable } from '../components/students-table/StudentsTable'
 import { COLOR } from '../constants/color.constant'
-import { Student, StudentsResult } from '../dto/students.dto'
+import { QueryDto } from '../dto/common.dto'
+import { Student } from '../dto/students.dto'
 import { AxiosStudentsRepository } from '../repositories/students/axios-students.repository'
 
-const emptyStudents: StudentsResult = {
-    students: [],
-    results: 0
+interface PagesData {
+    [key: string]: Student[];
 }
 
-const fakeStudentData: Student = {
-    name: 'Carlos Daniel Almeida Pereira Costa Pinto',
-    rg: 458769548,
-    cpf: 21564587452,
-    age: 28,
-    class: 'EPCAR',
-    address: 'Rua digdin madara com feijão e batata e frango, 2930'
+interface StudentsData {
+    pages: PagesData,
+    results: number
+}
+
+const emptyStudentsData: StudentsData = {
+    pages: {},
+    results: 0
 }
 
 const studentsRepository = new AxiosStudentsRepository('http://localhost:3001/students')
 
 export function StudentsListPage() {
+    const [studentsData, setStudentsData] = useState<StudentsData>(emptyStudentsData)
     const [currentPage, setCurrentPage] = useState(1)
-    const [studentsResult, setStudentsResult] = useState<StudentsResult>(emptyStudents)
 
     useEffect(() => {
-        if (studentsResult.results === 0) return
-
-        if (currentPage * MAX_STUDENTS_ON_PAGE < studentsResult.students.length) return
+        if (studentsData.results === 0) return
+        if (studentsData.pages[`${currentPage}`]) return
 
         (async () => {
-            await fetchStudents()
+            await fetchStudents({
+                limit: MAX_STUDENTS_ON_PAGE,
+                offset: currentPage > 1 ? (currentPage - 1) * MAX_STUDENTS_ON_PAGE : undefined
+            }, currentPage)
         })()
     }, [currentPage])
 
-    async function fetchStudents() {
+    async function fetchStudents(query: QueryDto = { limit: MAX_STUDENTS_ON_PAGE }, pageToSetData: number = 1) {
         try {
-            setStudentsResult(await studentsRepository.find())
+            const { students, results } = await studentsRepository.find(query);
+
+            setStudentsData(previousState => {
+                return {
+                    pages: {
+                        ...previousState.pages,
+                        [`${pageToSetData}`]: students
+                    }, results
+                }
+            })
         } catch (err) {
             console.error(err)
         }
     }
 
+    async function handleFetch() {
+        setCurrentPage(1)
+        setStudentsData(emptyStudentsData)
+        await fetchStudents()
+    }
+
     return (
         <PageContainer headerTitle='Lista de Alunos'>
-            <Button style={{ margin: '32px auto 0 auto' }} onClick={() => fetchStudents()} content={{ icon: <PlusIcon color={COLOR.neutral} />, text: 'Buscar Todos Alunos' }} />
-            <StudentsTable setCurrentPage={setCurrentPage} currentPage={currentPage} studentsResult={studentsResult} />
+            <Button style={{ margin: '32px auto 0 auto' }} onClick={handleFetch} content={{ icon: <PlusIcon color={COLOR.neutral} />, text: 'GET ALL TEST' }} />
+            <StudentsTable setCurrentPage={setCurrentPage} currentPage={currentPage} studentsResult={{ results: studentsData.results, students: studentsData.pages[`${currentPage}`] ?? [] }} />
         </PageContainer >
     )
 }

@@ -14,7 +14,7 @@ import { RgFormatter } from './helpers/rg-formatter.helper'
 import { CpfFormatter } from './helpers/cpf-formatter.helper'
 import { DateFormatter } from './helpers/date-formatter.helper'
 
-interface IProps {
+interface Props {
     studentsResult: StudentsResult
     currentPage: number
     setCurrentPage: React.Dispatch<React.SetStateAction<number>>
@@ -23,7 +23,7 @@ interface IProps {
 
 export const MAX_STUDENTS_ON_PAGE = 10
 
-export function StudentsTable({ studentsResult, style, currentPage, setCurrentPage }: IProps) {
+export function StudentsTable({ studentsResult, style, currentPage, setCurrentPage }: Props) {
     const { width } = useDimensions()
     const { results, students } = studentsResult
     const totalPages = Math.ceil(results / MAX_STUDENTS_ON_PAGE)
@@ -32,17 +32,16 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
         const rows = []
 
         for (let i = 0; i < MAX_STUDENTS_ON_PAGE; i++) {
-            const index = i + (currentPage - 1) * MAX_STUDENTS_ON_PAGE
-            const student = students[index]
+            const student = students[i]
 
             if (!student) {
-                rows.push(<Row key={index}> </Row>)
+                rows.push(<Row key={i}> </Row>)
                 continue
             }
 
             const value = student[key]
 
-            rows.push(<Row isVariant={index % 2 === 1 ? true : false} key={index}>{formatter ? formatter.format(value) : value.toString()}</Row>)
+            rows.push(<Row isVariant={i % 2 === 1 ? true : false} key={students[i].rg}>{formatter ? formatter.format(value) : value.toString()}</Row>)
         }
 
         return <>
