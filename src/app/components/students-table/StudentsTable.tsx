@@ -9,6 +9,10 @@ import { useDimensions } from '../../hooks/useDimensions'
 import { ExpandIcon } from '../../../assets/svgs/ExpandIcon'
 import { PageNumberIconButton, PageNumberTextButton } from './PageNumberButtons'
 import { Student, StudentsResult } from '../../dto/students.dto'
+import { DataFormatter } from './helpers/data-formatter.helper'
+import { RgFormatter } from './helpers/rg-formatter.helper'
+import { CpfFormatter } from './helpers/cpf-formatter.helper'
+import { DateFormatter } from './helpers/date-formatter.helper'
 
 interface IProps {
     studentsResult: StudentsResult
@@ -24,7 +28,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
     const { results, students } = studentsResult
     const totalPages = Math.ceil(results / MAX_STUDENTS_ON_PAGE)
 
-    function getRows(key: keyof Student) {
+    function getRows(key: keyof Student, formatter?: DataFormatter) {
         const rows = []
 
         for (let i = 0; i < MAX_STUDENTS_ON_PAGE; i++) {
@@ -38,7 +42,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
 
             const value = student[key]
 
-            rows.push(<Row isVariant={index % 2 === 1 ? true : false} key={index}>{typeof value === 'string' ? value : value.toString()}</Row>)
+            rows.push(<Row isVariant={index % 2 === 1 ? true : false} key={index}>{formatter ? formatter.format(value) : value.toString()}</Row>)
         }
 
         return <>
@@ -46,7 +50,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
         </>
     }
 
-    return <Container>
+    return <Container style={style}>
         <ListContainer>
             <Column width='16rem'>
                 <Row isTitle>Nome</Row>
@@ -54,11 +58,11 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
             </Column>
             <Column width='12rem'>
                 <Row isTitle>RG</Row>
-                {getRows('rg')}
+                {getRows('rg', new RgFormatter())}
             </Column>
             <Column width='12rem'>
                 <Row isTitle>CPF</Row>
-                {getRows('cpf')}
+                {getRows('cpf', new CpfFormatter())}
             </Column>
             <Column>
                 <Row isTitle>Turma</Row>
@@ -66,7 +70,7 @@ export function StudentsTable({ studentsResult, style, currentPage, setCurrentPa
             </Column>
             <Column width='14rem'>
                 <Row isTitle>Data de Nascimento</Row>
-                {getRows('birthdate')}
+                {getRows('birthdate', new DateFormatter())}
             </Column>
             <Column width='20rem'>
                 <Row isTitle>Endereço</Row>

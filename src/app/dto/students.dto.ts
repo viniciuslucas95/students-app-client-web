@@ -1,10 +1,10 @@
 export interface Student {
     name: string
     rg: number
-    cpf: number
+    cpf: string
     class: string
     address: string
-    birthdate: Date
+    birthdate: string
 }
 
 export interface StudentsResult {
